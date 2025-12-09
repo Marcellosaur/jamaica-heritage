@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'swamp-safari';
+  title = 'Swamp Safari – Falmouth Trelawny';
+  currentYear: number = new Date().getFullYear();
 }

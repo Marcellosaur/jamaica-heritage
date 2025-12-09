@@ -1,0 +1,102 @@
+<section class="section">
+  <header class="section-header">
+    <h2 class="section-title">Contact & Bookings</h2>
+    <p class="section-subtitle">
+      Send us a quick message to ask questions or request a group booking.
+    </p>
+  </header>
+
+  <div class="contact-layout">
+    <form class="card contact-form" (ngSubmit)="onSubmit()" #bookingForm="ngForm">
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          [(ngModel)]="model.name">
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          [(ngModel)]="model.email">
+      </div>
+
+      <div class="field">
+        <label for="tourType">Tour Type</label>
+        <select
+          id="tourType"
+          name="tourType"
+          [(ngModel)]="model.tourType">
+          <option>General Tour</option>
+          <option>School / Educational Group</option>
+          <option>Cruise Ship Excursion</option>
+          <option>Private Guided Tour</option>
+        </select>
+      </div>
+
+      <div class="field inline">
+        <div>
+          <label for="groupSize">Group Size</label>
+          <input
+            id="groupSize"
+            name="groupSize"
+            type="number"
+            min="1"
+            [(ngModel)]="model.groupSize">
+        </div>
+        <div>
+          <label>Preferred Date</label>
+          <input type="date" name="preferredDate" ngModel>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Message / Questions</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          [(ngModel)]="model.message"></textarea>
+      </div>
+
+      <button class="btn-primary" type="submit" [disabled]="!bookingForm.form.valid">
+        Submit Request
+      </button>
+
+      <p *ngIf="submitted" class="success">
+        Thank you! Your request has been recorded for demonstration purposes.
+      </p>
+    </form>
+
+    <aside class="card contact-info">
+      <h3>Contact Details</h3>
+      <p>
+        <strong>Address:</strong><br>
+        Swamp Safari Attraction<br>
+        Near Falmouth, Trelawny, Jamaica
+      </p>
+      <p>
+        <strong>Phone:</strong><br>
+        (876) 000-0000
+      </p>
+      <p>
+        <strong>Email:</strong><br>
+        info@swampsafarijamaica.com
+      </p>
+
+      <h4>Good to Know</h4>
+      <ul>
+        <li>Free parking is available for cars and buses.</li>
+        <li>Restrooms and seating are on-site.</li>
+        <li>Guided tours are usually conducted in English.</li>
+      </ul>
+    </aside>
+  </div>
+</section>

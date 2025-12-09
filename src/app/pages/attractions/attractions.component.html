@@ -1,0 +1,66 @@
+<section class="section">
+  <header class="section-header">
+    <h2 class="section-title">Attractions & Experiences</h2>
+    <p class="section-subtitle">
+      A mix of wildlife encounters, education and relaxation – designed for all ages.
+    </p>
+  </header>
+
+  <div class="card-grid">
+    <article *ngFor="let item of attractions" class="card attraction-card">
+      <div class="img-wrapper">
+        <img [src]="item.image" [alt]="item.name">
+      </div>
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+
+      <dl class="meta">
+        <div>
+          <dt>Duration</dt>
+          <dd>{{ item.duration }}</dd>
+        </div>
+        <div>
+          <dt>Activity Level</dt>
+          <dd>{{ item.difficulty }}</dd>
+        </div>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<section class="section planning">
+  <header class="section-header">
+    <h2 class="section-title">Planning Your Visit</h2>
+  </header>
+
+  <div class="planning-grid">
+    <div class="card">
+      <h3>Opening Hours</h3>
+      <ul>
+        <li>Monday – Saturday: 9:00 a.m. – 5:00 p.m.</li>
+        <li>Sunday & Public Holidays: 10:00 a.m. – 4:00 p.m.</li>
+        <li>Last tour usually begins 1 hour before closing.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>What to Bring</h3>
+      <ul>
+        <li>Comfortable walking shoes or sandals</li>
+        <li>Insect repellent and sunscreen</li>
+        <li>Reusable water bottle</li>
+        <li>Camera or smartphone for photos</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Safety Tips</h3>
+      <ul>
+        <li>Stay behind safety rails at all times.</li>
+        <li>Follow instructions from guides and handlers.</li>
+        <li>Do not attempt to feed or touch animals.</li>
+        <li>Children should remain with an adult.</li>
+      </ul>
+    </div>
+  </div>
+</section>
