@@ -7,24 +7,155 @@
   </header>
 
   <div class="card-grid">
-    <article *ngFor="let item of attractions" class="card attraction-card">
+
+    
+    <article class="card attraction-card">
       <div class="img-wrapper">
-        <img [src]="item.image" [alt]="item.name">
+        <!-- Image for Attraction 1 -->
+        <img src="/assets/images/tour.jpg" alt="Guided swamp safari tour on a boardwalk">
       </div>
-      <h3>{{ item.name }}</h3>
-      <p>{{ item.description }}</p>
+      <h3>Guided Swamp Safari Tour</h3>
+      <p>
+        Board our secure walkway and explore the mangrove-lined swamp with an experienced
+        guide who shares stories about local wildlife and swamp folklore.
+      </p>
 
       <dl class="meta">
         <div>
           <dt>Duration</dt>
-          <dd>{{ item.duration }}</dd>
+          <dd>45–60 minutes</dd>
         </div>
         <div>
           <dt>Activity Level</dt>
-          <dd>{{ item.difficulty }}</dd>
+          <dd>Easy</dd>
         </div>
       </dl>
     </article>
+
+    
+    <article class="card attraction-card">
+      <div class="img-wrapper">
+        <!-- Image for Attraction 2 -->
+        <img src="/assets/images/3669076f5d3ed531152b7c557260924c-e1723737751603.webp" alt="Crocodile feeding show at Swamp Safari">
+      </div>
+      <h3>Crocodile Feeding Show</h3>
+      <p>
+        Observe Jamaican crocodiles from a safe platform as our handlers demonstrate
+        feeding techniques and talk about conservation efforts.
+      </p>
+
+      <dl class="meta">
+        <div>
+          <dt>Duration</dt>
+          <dd>30 minutes</dd>
+        </div>
+        <div>
+          <dt>Activity Level</dt>
+          <dd>Easy (viewing only)</dd>
+        </div>
+      </dl>
+    </article>
+
+    <!--
+      ATTRACTION 3 – BIRD WATCHING DECK
+      1. Save an image file in: src/assets/images/bird-deck.jpg
+    -->
+    <article class="card attraction-card">
+      <div class="img-wrapper">
+        <!-- Image for Attraction 3 -->
+        <img src="assets/images/bird.jpg" alt="Bird watching deck overlooking the swamp">
+      </div>
+      <h3>Bird Watching Deck</h3>
+      <p>
+        Enjoy a peaceful lookout area where you can spot egrets, herons and other wetland
+        birds in their natural habitat.
+      </p>
+
+      <dl class="meta">
+        <div>
+          <dt>Duration</dt>
+          <dd>Flexible</dd>
+        </div>
+        <div>
+          <dt>Activity Level</dt>
+          <dd>Easy</dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card attraction-card">
+      <div class="img-wrapper">
+        <!-- Image for Attraction 4 -->
+        <img src="assets/images/School-trip.jpg" alt="School group tour at Swamp Safari">
+      </div>
+      <h3>School & Group Tours</h3>
+      <p>
+        Customised educational tours aligned with geography, biology and environmental
+        science curricula for local and international schools.
+      </p>
+
+      <dl class="meta">
+        <div>
+          <dt>Duration</dt>
+          <dd>60–90 minutes</dd>
+        </div>
+        <div>
+          <dt>Activity Level</dt>
+          <dd>Easy–Moderate</dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card attraction-card">
+      <div class="img-wrapper">
+        <!-- Image for Attraction 5 -->
+        <img src="assets/images/swamp.jpg" alt="Scenic photo spot in the swamp">
+      </div>
+      <h3>Photography Spots</h3>
+      <p>
+        Capture scenic views of the swamp, rustic wooden bridges and the surrounding hills
+        of Trelawny.
+      </p>
+
+      <dl class="meta">
+        <div>
+          <dt>Duration</dt>
+          <dd>Flexible</dd>
+        </div>
+        <div>
+          <dt>Activity Level</dt>
+          <dd>Easy</dd>
+        </div>
+      </dl>
+    </article>
+
+    <!--
+      ATTRACTION 6 – CHILL-OUT DECK & GIFT AREA
+      1. Save an image file in: src/assets/images/chill-deck.jpg
+    -->
+    <article class="card attraction-card">
+      <div class="img-wrapper">
+        <!-- Image for Attraction 6 -->
+        <img src="assets/images/chilll.jpg" alt="Relaxing chill-out deck and gift area">
+      </div>
+      <h3>Chill-out Deck & Gift Area</h3>
+      <p>
+        Relax after your tour, grab a cold drink and browse local crafts and souvenirs
+        to remember your visit.
+      </p>
+
+      <dl class="meta">
+        <div>
+          <dt>Duration</dt>
+          <dd>Flexible</dd>
+        </div>
+        <div>
+          <dt>Activity Level</dt>
+          <dd>Easy</dd>
+        </div>
+      </dl>
+    </article>
+
   </div>
 </section>
 

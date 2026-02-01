@@ -1,19 +1,46 @@
 <div class="site-wrapper">
   <header class="top-bar">
-    <div class="logo-area">
-      <span class="logo-mark">SS</span>
-      <div class="logo-text">
-        <h1>Swamp Safari</h1>
-        <p>Falmouth, Trelawny · Jamaica</p>
-      </div>
-    </div>
+    <div class="header-inner">
+      <!-- Brand / Logo area -->
+      <div class="logo-area">
+        <div class="logo-ring">
+          <img
+            src="assets/images/logo.png"
+            alt="Swamp Safari Logo"
+            class="logo-image"
+          />
+        </div>
 
-    <nav class="main-nav">
-      <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      <a routerLink="/attractions" routerLinkActive="active">Attractions</a>
-      <a routerLink="/about" routerLinkActive="active">About</a>
-      <a routerLink="/contact" routerLinkActive="active">Contact</a>
-    </nav>
+        <div class="logo-text">
+          <h1>Swamp Safari</h1>
+          <p>Falmouth, Trelawny · Jamaica</p>
+          <span class="logo-tagline">Wetlands · Wildlife · Adventure</span>
+        </div>
+      </div>
+
+      <!-- Main navigation -->
+      <nav class="main-nav">
+        <a
+          class="nav-link"
+          routerLink=""
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+        <a class="nav-link" routerLink="/attractions" routerLinkActive="active"
+          >Attractions</a
+        >
+        <a class="nav-link" routerLink="/about" routerLinkActive="active"
+          >About</a
+        >
+        <a
+          class="nav-link nav-cta"
+          routerLink="/contact"
+          routerLinkActive="active"
+          >Book a Tour</a
+        >
+      </nav>
+    </div>
   </header>
 
   <main class="content-area">
@@ -21,7 +48,10 @@
   </main>
 
   <footer class="site-footer">
-  <p>&copy; {{ currentYear }} Swamp Safari, Falmouth Trelawny. All rights reserved.</p>
-  <p class="footer-note">This is an educational project website.</p>
-</footer>
+    <p>
+      &copy; {{ currentYear }} Swamp Safari, Falmouth Trelawny. All rights
+      reserved.
+    </p>
+    <p class="footer-note">This is an educational project website.</p>
+  </footer>
 </div>
