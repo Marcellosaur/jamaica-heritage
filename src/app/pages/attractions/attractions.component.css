@@ -50,3 +50,9 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.btn{
+  color: white;
+  background-color: blueviolet;
+}

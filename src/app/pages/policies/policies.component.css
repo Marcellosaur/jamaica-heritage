@@ -1,0 +1,17 @@
+﻿.policy-card {
+  margin-bottom: 1rem;
+}
+
+.policy-card h3 {
+  margin-top: 0;
+}
+
+.policy-card ul {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+  color: #334155;
+}
+
+.policy-card li {
+  margin-bottom: 0.3rem;
+}

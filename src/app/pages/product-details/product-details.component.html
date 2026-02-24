@@ -1,0 +1,27 @@
+﻿<section class="section">
+  <p *ngIf="loading">Loading product details...</p>
+  <p *ngIf="error" class="status-error">{{ error }}</p>
+
+  <article class="card details-card" *ngIf="!loading && product">
+    <div class="media">
+      <img
+        [src]="getProductImage(product)"
+        [alt]="product.name"
+        class="product-image"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+
+    <div class="content">
+      <h2 class="section-title">{{ product.name }}</h2>
+      <p class="description">{{ product.description }}</p>
+      <p class="price">${{ product.price | number: '1.2-2' }}</p>
+
+      <div class="actions">
+        <button class="btn-primary" type="button" (click)="addToCart()">Add to Cart</button>
+        <button class="btn-secondary" type="button" (click)="backToShop()">Back to Shop</button>
+      </div>
+    </div>
+  </article>
+</section>

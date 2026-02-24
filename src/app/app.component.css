@@ -1,13 +1,23 @@
-/* Layout shell */
+﻿.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 2000;
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0 0 0.4rem 0.4rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+}
 .site-wrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-
-/* ----------------------- */
-/* HEADER + NAVBAR STYLING */
-/* ----------------------- */
 
 .top-bar {
   background: radial-gradient(circle at 0% 0%, #facc15 0, #fbbf24 20%, #0f3f33 70%);
@@ -26,12 +36,12 @@
   gap: 1.75rem;
 }
 
-/* Brand area */
-
 .logo-area {
   display: flex;
   align-items: center;
   gap: 1rem;
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo-ring {
@@ -80,13 +90,24 @@
   color: #fefce8;
 }
 
-/* Navigation */
-
 .main-nav {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   font-size: 0.9rem;
+  row-gap: 0.45rem;
+}
+
+.menu-toggle {
+  display: none;
+  border: 1px solid rgba(236, 253, 245, 0.55);
+  background: rgba(6, 78, 59, 0.6);
+  color: #f0fdf4;
+  border-radius: 0.6rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .nav-link {
@@ -132,8 +153,6 @@
   transform: translateY(0);
 }
 
-/* Call-to-action button in nav */
-
 .nav-cta {
   background: linear-gradient(135deg, #16a34a, #22c55e);
   color: #052e16;
@@ -146,9 +165,37 @@
   color: #052e16;
 }
 
-/* ------------------------ */
-/* MAIN CONTENT + FOOTER    */
-/* ------------------------ */
+.nav-auth {
+  border: 1px solid rgba(236, 253, 245, 0.35);
+}
+
+.nav-button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-logout {
+  background: linear-gradient(135deg, #b91c1c, #ef4444);
+  border: 1px solid rgba(127, 29, 29, 0.95);
+  color: #fff1f2;
+}
+
+.nav-logout:hover {
+  background: linear-gradient(135deg, #dc2626, #f87171);
+  color: #fff1f2;
+}
+
+.cart-count {
+  display: inline-block;
+  margin-left: 0.35rem;
+  min-width: 1.3rem;
+  text-align: center;
+  border-radius: 999px;
+  background-color: #064e3b;
+  color: #d1fae5;
+  font-size: 0.75rem;
+  padding: 0.05rem 0.3rem;
+}
 
 .content-area {
   flex: 1;
@@ -156,6 +203,20 @@
   max-width: 1120px;
   margin: 0 auto;
   width: 100%;
+}
+
+.toast-notice {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+  background: linear-gradient(135deg, #065f46, #16a34a);
+  color: #f0fdf4;
+  padding: 0.65rem 0.95rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 12px 24px rgba(4, 120, 87, 0.35);
+  border: 1px solid rgba(6, 95, 70, 0.95);
+  font-size: 0.9rem;
 }
 
 .site-footer {
@@ -172,9 +233,14 @@
   font-style: italic;
 }
 
-/* ------------------------ */
-/* RESPONSIVE BEHAVIOUR     */
-/* ------------------------ */
+.footer-links {
+  margin-top: 0.35rem;
+}
+
+.footer-links a {
+  color: #0f766e;
+  text-decoration: underline;
+}
 
 @media (max-width: 900px) {
   .header-inner {
@@ -183,9 +249,23 @@
     gap: 0.9rem;
   }
 
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .main-nav {
-    flex-wrap: wrap;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: flex-start;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .main-nav.open {
+    display: flex;
   }
 
   .content-area {
@@ -206,5 +286,19 @@
 
   .nav-link {
     padding: 0.3rem 0.6rem;
+    width: 100%;
+  }
+
+  .nav-link,
+  .nav-button {
+    min-height: 36px;
+  }
+
+  .toast-notice {
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.75rem;
+    text-align: center;
   }
 }
+

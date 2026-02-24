@@ -1,0 +1,41 @@
+﻿<section class="section auth-layout">
+  <div class="card auth-card">
+    <h2 class="section-title">{{ mode === 'login' ? 'Sign In' : 'Create Account' }}</h2>
+    <p class="section-subtitle">Sign in before checkout.</p>
+
+    <div class="mode-toggle">
+      <button type="button" [class.active]="mode === 'login'" (click)="setMode('login')">Login</button>
+      <button type="button" [class.active]="mode === 'register'" (click)="setMode('register')">Register</button>
+    </div>
+
+    <form (ngSubmit)="submit()" #authForm="ngForm" class="auth-form" novalidate>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        [(ngModel)]="email"
+        required
+        email
+        maxlength="120"
+      />
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        [(ngModel)]="password"
+        required
+        minlength="8"
+        maxlength="72"
+      />
+
+      <p *ngIf="error" class="status-error">{{ error }}</p>
+
+      <button type="submit" class="btn-primary" [disabled]="authForm.invalid || loading">
+        {{ loading ? 'Please wait...' : (mode === 'login' ? 'Login' : 'Register') }}
+      </button>
+    </form>
+  </div>
+</section>

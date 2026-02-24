@@ -1,51 +1,105 @@
+﻿<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <div class="site-wrapper">
   <header class="top-bar">
     <div class="header-inner">
-      <!-- Brand / Logo area -->
-      <div class="logo-area">
+      <a
+        class="logo-area"
+        routerLink="/"
+        (click)="closeNav()"
+        aria-label="Go to home page"
+      >
         <div class="logo-ring">
           <img
             src="assets/images/logo.png"
             alt="Swamp Safari Logo"
             class="logo-image"
+            decoding="async"
           />
         </div>
 
         <div class="logo-text">
           <h1>Swamp Safari</h1>
-          <p>Falmouth, Trelawny · Jamaica</p>
-          <span class="logo-tagline">Wetlands · Wildlife · Adventure</span>
+          <p>Falmouth, Trelawny - Jamaica</p>
+          <span class="logo-tagline">Wetlands - Wildlife - Adventure</span>
         </div>
-      </div>
+      </a>
 
-      <!-- Main navigation -->
-      <nav class="main-nav">
+      <button
+        type="button"
+        class="menu-toggle"
+        [attr.aria-expanded]="navOpen"
+        aria-controls="main-nav"
+        aria-label="Toggle navigation menu"
+        (click)="toggleNav()"
+      >
+        Menu
+      </button>
+
+      <nav id="main-nav" class="main-nav" [class.open]="navOpen" aria-label="Primary navigation">
         <a
           class="nav-link"
           routerLink=""
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeNav()"
           >Home</a
         >
-        <a class="nav-link" routerLink="/attractions" routerLinkActive="active"
+        <a class="nav-link" routerLink="/attractions" routerLinkActive="active" (click)="closeNav()"
           >Attractions</a
         >
-        <a class="nav-link" routerLink="/about" routerLinkActive="active"
+        <a class="nav-link" routerLink="/shop" routerLinkActive="active" (click)="closeNav()"
+          >Shop</a
+        >
+        <a class="nav-link" routerLink="/cart" routerLinkActive="active" (click)="closeNav()"
+          >Cart <span class="cart-count">{{ cartCount$ | async }}</span></a
+        >
+        <a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNav()"
           >About</a
         >
         <a
           class="nav-link nav-cta"
           routerLink="/contact"
           routerLinkActive="active"
-          >Book a Tour</a
+          (click)="closeNav()"
+          >Contact Us</a
         >
+        <a
+          *ngIf="isLoggedIn$ | async"
+          class="nav-link"
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          (click)="closeNav()"
+          >Dashboard</a
+        >
+
+        <a
+          *ngIf="!(isLoggedIn$ | async)"
+          class="nav-link nav-auth"
+          routerLink="/login"
+          routerLinkActive="active"
+          (click)="closeNav()"
+          >Login</a
+        >
+        <button
+          *ngIf="isLoggedIn$ | async"
+          type="button"
+          class="nav-link nav-auth nav-button nav-logout"
+          (click)="logout()"
+        >
+          Logout
+        </button>
       </nav>
     </div>
   </header>
 
-  <main class="content-area">
+  <main id="main-content" class="content-area" tabindex="-1">
     <router-outlet></router-outlet>
   </main>
+
+  <div *ngIf="toastMessage" class="toast-notice" role="status" aria-live="polite">
+    {{ toastMessage }}
+  </div>
 
   <footer class="site-footer">
     <p>
@@ -53,5 +107,8 @@
       reserved.
     </p>
     <p class="footer-note">This is an educational project website.</p>
+    <p class="footer-links">
+      <a routerLink="/policies">Privacy Policy & Accessibility Statement</a>
+    </p>
   </footer>
 </div>

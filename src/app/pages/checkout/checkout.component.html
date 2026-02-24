@@ -1,0 +1,113 @@
+﻿<section class="section">
+  <header class="section-header">
+    <h2 class="section-title">Checkout</h2>
+    <p class="section-subtitle">Simulated checkout: enter shipping and card details to place your order.</p>
+  </header>
+
+  <div class="card" *ngIf="items.length === 0">
+    <p>Your cart is empty.</p>
+    <button class="btn-primary" type="button" (click)="goToShop()">Back to Shop</button>
+  </div>
+
+  <form class="card checkout-form" *ngIf="items.length > 0" (ngSubmit)="placeOrder()" novalidate>
+    <h3>Order Summary</h3>
+    <ul class="checkout-list">
+      <li *ngFor="let item of items">
+        <span>{{ item.product.name }} x {{ item.qty }}</span>
+        <strong>${{ item.product.price * item.qty | number: '1.2-2' }}</strong>
+      </li>
+    </ul>
+
+    <p class="checkout-total">Total: ${{ getTotal() | number: '1.2-2' }}</p>
+
+    <h3>Shipping Details</h3>
+    <div class="field-grid">
+      <label>
+        Full Name
+        <input type="text" name="shippingFullName" [(ngModel)]="shippingFullName" (ngModelChange)="onFieldChange()" required minlength="2" maxlength="120" pattern="^[A-Za-z][A-Za-z\s'-]{1,119}$" />
+      </label>
+
+      <label>
+        Address Line 1
+        <input type="text" name="shippingAddressLine1" [(ngModel)]="shippingAddressLine1" (ngModelChange)="onFieldChange()" required minlength="5" maxlength="255" />
+      </label>
+
+      <label>
+        City
+        <input type="text" name="shippingCity" [(ngModel)]="shippingCity" (ngModelChange)="onFieldChange()" required minlength="2" maxlength="120" />
+      </label>
+
+      <label>
+        Parish/State
+        <input type="text" name="shippingParish" [(ngModel)]="shippingParish" (ngModelChange)="onFieldChange()" required minlength="2" maxlength="120" />
+      </label>
+
+      <label>
+        Postal Code
+        <input type="text" name="shippingPostalCode" [(ngModel)]="shippingPostalCode" (ngModelChange)="onFieldChange()" required minlength="3" maxlength="12" pattern="^[A-Za-z0-9\s-]{3,12}$" />
+      </label>
+    </div>
+
+    <h3>Card Details (Simulated)</h3>
+    <div class="field-grid">
+      <label>
+        Name on Card
+        <input type="text" name="cardName" [(ngModel)]="cardName" (ngModelChange)="onFieldChange()" required minlength="2" maxlength="120" pattern="^[A-Za-z][A-Za-z\s'-]{1,119}$" />
+      </label>
+
+      <label>
+        Card Number
+        <input
+          type="text"
+          name="cardNumber"
+          [(ngModel)]="cardNumber"
+          (ngModelChange)="onFieldChange()"
+          required
+          maxlength="19"
+          pattern="^[0-9\s-]{16,19}$"
+          placeholder="1234 5678 1234 5678"
+        />
+      </label>
+
+      <label>
+        Expiry (MM/YY)
+        <input
+          type="text"
+          name="cardExpiry"
+          [(ngModel)]="cardExpiry"
+          (ngModelChange)="onFieldChange()"
+          required
+          maxlength="5"
+          pattern="^(0[1-9]|1[0-2])\/[0-9]{2}$"
+          placeholder="MM/YY"
+        />
+      </label>
+
+      <label>
+        CVV
+        <input
+          type="password"
+          name="cardCvv"
+          [(ngModel)]="cardCvv"
+          (ngModelChange)="onFieldChange()"
+          required
+          minlength="3"
+          maxlength="4"
+          pattern="^[0-9]{3,4}$"
+          placeholder="123"
+        />
+      </label>
+    </div>
+
+    <p *ngIf="error" class="status-error">{{ error }}</p>
+    <p *ngIf="success" class="status-ok">{{ success }}</p>
+
+    <button
+      type="submit"
+      class="btn-primary"
+      [disabled]="loading"
+    >
+      {{ loading ? 'Processing...' : 'Place Order' }}
+    </button>
+  </form>
+</section>

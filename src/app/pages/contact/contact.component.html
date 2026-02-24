@@ -1,13 +1,13 @@
-<section class="section">
+﻿<section class="section">
   <header class="section-header">
-    <h2 class="section-title">Contact & Bookings</h2>
+    <h2 class="section-title">Contact Us</h2>
     <p class="section-subtitle">
-      Send us a quick message to ask questions or request a group booking.
+      Send us a message to inquire about booking a tour, log a complaint, or share feedback.
     </p>
   </header>
 
   <div class="contact-layout">
-    <form class="card contact-form" (ngSubmit)="onSubmit()" #bookingForm="ngForm">
+    <form class="card contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm" novalidate>
       <div class="field">
         <label for="name">Full Name</label>
         <input
@@ -15,7 +15,10 @@
           name="name"
           type="text"
           required
-          [(ngModel)]="model.name">
+          minlength="2"
+          maxlength="120"
+          [(ngModel)]="model.name"
+        />
       </div>
 
       <div class="field">
@@ -25,15 +28,30 @@
           name="email"
           type="email"
           required
-          [(ngModel)]="model.email">
+          email
+          maxlength="120"
+          [(ngModel)]="model.email"
+        />
       </div>
 
       <div class="field">
-        <label for="tourType">Tour Type</label>
+        <label for="messageType">Reason for Contact</label>
         <select
-          id="tourType"
-          name="tourType"
-          [(ngModel)]="model.tourType">
+          id="messageType"
+          name="messageType"
+          required
+          [(ngModel)]="model.messageType"
+          (ngModelChange)="onMessageTypeChange()"
+        >
+          <option value="Tour Booking Inquiry">Tour Booking Inquiry</option>
+          <option value="Complaint">Complaint</option>
+          <option value="Feedback">Feedback</option>
+        </select>
+      </div>
+
+      <div class="field" *ngIf="isTourInquiry()">
+        <label for="tourType">Tour Type</label>
+        <select id="tourType" name="tourType" [(ngModel)]="model.tourType" required>
           <option>General Tour</option>
           <option>School / Educational Group</option>
           <option>Cruise Ship Excursion</option>
@@ -41,7 +59,7 @@
         </select>
       </div>
 
-      <div class="field inline">
+      <div class="field inline" *ngIf="isTourInquiry()">
         <div>
           <label for="groupSize">Group Size</label>
           <input
@@ -49,53 +67,72 @@
             name="groupSize"
             type="number"
             min="1"
-            [(ngModel)]="model.groupSize">
+            max="500"
+            [(ngModel)]="model.groupSize"
+          />
         </div>
         <div>
-          <label>Preferred Date</label>
-          <input type="date" name="preferredDate" ngModel>
+          <label for="preferredDate">Preferred Date</label>
+          <input id="preferredDate" type="date" name="preferredDate" [min]="minDate()" [(ngModel)]="model.preferredDate" />
         </div>
       </div>
 
       <div class="field">
-        <label for="message">Message / Questions</label>
+        <label for="subject">Subject</label>
+        <input
+          id="subject"
+          name="subject"
+          type="text"
+          required
+          minlength="3"
+          maxlength="120"
+          [(ngModel)]="model.subject"
+        />
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
         <textarea
           id="message"
           name="message"
-          rows="4"
-          [(ngModel)]="model.message"></textarea>
+          rows="5"
+          required
+          minlength="10"
+          maxlength="2000"
+          [(ngModel)]="model.message"
+        ></textarea>
       </div>
 
-      <button class="btn-primary" type="submit" [disabled]="!bookingForm.form.valid">
-        Submit Request
+      <button class="btn-primary" type="submit" [disabled]="!contactForm.form.valid">
+        Send Message
       </button>
 
       <p *ngIf="submitted" class="success">
-        Thank you! Your request has been recorded for demonstration purposes.
+        Thank you. Your {{ model.messageType.toLowerCase() }} message has been received.
       </p>
     </form>
 
     <aside class="card contact-info">
       <h3>Contact Details</h3>
       <p>
-        <strong>Address:</strong><br>
-        Swamp Safari Attraction<br>
+        <strong>Address:</strong><br />
+        Swamp Safari Attraction<br />
         Near Falmouth, Trelawny, Jamaica
       </p>
       <p>
-        <strong>Phone:</strong><br>
+        <strong>Phone:</strong><br />
         (876) 000-0000
       </p>
       <p>
-        <strong>Email:</strong><br>
+        <strong>Email:</strong><br />
         info@swampsafarijamaica.com
       </p>
 
-      <h4>Good to Know</h4>
+      <h4>Response Times</h4>
       <ul>
-        <li>Free parking is available for cars and buses.</li>
-        <li>Restrooms and seating are on-site.</li>
-        <li>Guided tours are usually conducted in English.</li>
+        <li>Tour inquiries: usually within 1 business day.</li>
+        <li>Complaints: acknowledged within 2 business days.</li>
+        <li>Feedback: reviewed by our operations team weekly.</li>
       </ul>
     </aside>
   </div>

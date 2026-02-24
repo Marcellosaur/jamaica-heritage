@@ -1,0 +1,136 @@
+﻿<section class="section">
+  <header class="section-header">
+    <h2 class="section-title">User Dashboard</h2>
+    <p class="section-subtitle">Manage account details, tour bookings, and order history.</p>
+  </header>
+
+  <p *ngIf="loading">Loading dashboard...</p>
+  <p *ngIf="dataError" class="status-error">{{ dataError }}</p>
+
+  <div class="dashboard-grid" *ngIf="!loading">
+    <article class="card dashboard-profile">
+      <h3>Account Management</h3>
+      <p class="section-subtitle">Save your contact details and address for future bookings.</p>
+
+      <form (ngSubmit)="saveProfile()" #profileForm="ngForm" class="booking-form" novalidate>
+        <label>
+          Full Name
+          <input type="text" name="full_name" [(ngModel)]="profile.full_name" required minlength="2" maxlength="150" />
+        </label>
+
+        <label>
+          Phone
+          <input type="text" name="phone" [(ngModel)]="profile.phone" maxlength="40" pattern="^[0-9+()\s-]{7,40}$" />
+        </label>
+
+        <label>
+          Address Line 1
+          <input type="text" name="address_line1" [(ngModel)]="profile.address_line1" required minlength="5" maxlength="255" />
+        </label>
+
+        <label>
+          Address Line 2
+          <input type="text" name="address_line2" [(ngModel)]="profile.address_line2" maxlength="255" />
+        </label>
+
+        <label>
+          City
+          <input type="text" name="city" [(ngModel)]="profile.city" required minlength="2" maxlength="120" />
+        </label>
+
+        <label>
+          Parish/State
+          <input type="text" name="parish_state" [(ngModel)]="profile.parish_state" maxlength="120" />
+        </label>
+
+        <label>
+          Postal Code
+          <input type="text" name="postal_code" [(ngModel)]="profile.postal_code" maxlength="20" pattern="^[A-Za-z0-9\s-]{3,20}$" />
+        </label>
+
+        <label>
+          Country
+          <input type="text" name="country" [(ngModel)]="profile.country" required minlength="2" maxlength="120" />
+        </label>
+
+        <p *ngIf="profileError" class="status-error">{{ profileError }}</p>
+        <p *ngIf="profileSuccess" class="status-ok">{{ profileSuccess }}</p>
+
+        <button class="btn-primary" type="submit" [disabled]="profileSaving || !profileForm.valid">
+          {{ profileSaving ? 'Saving...' : 'Save Details' }}
+        </button>
+      </form>
+    </article>
+
+    <article class="card">
+      <h3>Book a Tour</h3>
+      <p class="section-subtitle">Submit a booking request linked to your account.</p>
+
+      <form (ngSubmit)="submitTourBooking()" #tourForm="ngForm" class="booking-form" novalidate>
+        <label>
+          Tour Type
+          <select name="tourType" [(ngModel)]="tourType" required>
+            <option>General Tour</option>
+            <option>School / Educational Group</option>
+            <option>Cruise Ship Excursion</option>
+            <option>Private Guided Tour</option>
+          </select>
+        </label>
+
+        <label>
+          Group Size
+          <input type="number" min="1" max="500" name="groupSize" [(ngModel)]="groupSize" />
+        </label>
+
+        <label>
+          Preferred Date
+          <input type="date" name="preferredDate" [min]="minDate()" [(ngModel)]="preferredDate" />
+        </label>
+
+        <label>
+          Notes
+          <textarea name="notes" rows="3" maxlength="1000" [(ngModel)]="notes"></textarea>
+        </label>
+
+        <p *ngIf="bookingError" class="status-error">{{ bookingError }}</p>
+        <p *ngIf="bookingSuccess" class="status-ok">{{ bookingSuccess }}</p>
+
+        <button class="btn-primary" type="submit" [disabled]="bookingSubmitting || !tourForm.valid">
+          {{ bookingSubmitting ? 'Submitting...' : 'Submit Booking' }}
+        </button>
+      </form>
+    </article>
+
+    <article class="card">
+      <h3>Your Tour Bookings</h3>
+      <p *ngIf="bookings.length === 0">No tour bookings yet.</p>
+      <ul class="data-list" *ngIf="bookings.length > 0">
+        <li *ngFor="let booking of bookings">
+          <strong>{{ booking.tour_type }}</strong>
+          <span>Status: {{ booking.status }}</span>
+          <span *ngIf="booking.group_size">Group size: {{ booking.group_size }}</span>
+          <span *ngIf="booking.preferred_date">Preferred date: {{ booking.preferred_date | date }}</span>
+        </li>
+      </ul>
+    </article>
+
+    <article class="card dashboard-orders">
+      <h3>Your Orders</h3>
+      <p *ngIf="orders.length === 0">No orders yet.</p>
+
+      <div *ngFor="let order of orders" class="order-card">
+        <p>
+          <strong>Order #{{ order.id }}</strong>
+          <span class="meta">{{ order.created_at | date: 'medium' }}</span>
+        </p>
+        <p>Status: {{ order.status }} | Total: ${{ order.total | number: '1.2-2' }}</p>
+
+        <ul class="data-list compact" *ngIf="order.items.length > 0">
+          <li *ngFor="let item of order.items">
+            {{ item.productName }} x {{ item.qty }} - ${{ item.lineTotal | number: '1.2-2' }}
+          </li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
